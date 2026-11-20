@@ -11,10 +11,15 @@
 -- (dijalankan hanya bila tabel kasus masih kosong → idempoten).
 --
 -- Isi: 20 kasus K001-K020 tersebar pada penyakit P01-P08:
---   K006 berstatus 'nonaktif' untuk menguji filter status;
---   K019 bersumber 'import' untuk menguji filter sumber;
---   K012 hanya G14=2 dan G16=1 — dipakai menguji deteksi duplikat
---        (input yang sama harus menghasilkan similarity 1,0).
+--   P01 Common Cold: K001, K002, K019 (sumber import)
+--   P02 Influenza:   K003, K004, K020
+--   P03 Faringitis:  K005, K006
+--   P04 Bronkitis:   K007, K008
+--   P05 Asma:        K009, K010, K011
+--   P06 Pneumonia:   K012, K013, K014
+--   P07 TBC Paru:    K015, K016
+--   P08 PPOK:        K017, K018
+--
 -- Setiap kasus memuat vektor LENGKAP 18 gejala (nilai 0 ikut
 -- disimpan), sama seperti perilaku formulir kasus manual.
 -- ============================================================
@@ -28,13 +33,13 @@ INSERT INTO kasus (kode_kasus, id_penyakit, sumber, status) VALUES
   ('K003', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P02'), 'pakar',   'aktif'),
   ('K004', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P02'), 'pakar',   'aktif'),
   ('K005', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P03'), 'pakar',   'aktif'),
-  ('K006', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P03'), 'pakar',   'nonaktif'),
+  ('K006', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P03'), 'pakar',   'aktif'),
   ('K007', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P04'), 'pakar',   'aktif'),
   ('K008', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P04'), 'pakar',   'aktif'),
   ('K009', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P05'), 'pakar',   'aktif'),
   ('K010', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P05'), 'pakar',   'aktif'),
   ('K011', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P05'), 'pakar',   'aktif'),
-  ('K012', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P05'), 'pakar',   'aktif'),
+  ('K012', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P06'), 'pakar',   'aktif'),
   ('K013', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P06'), 'pakar',   'aktif'),
   ('K014', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P06'), 'pakar',   'aktif'),
   ('K015', (SELECT id_penyakit FROM penyakit WHERE kode_penyakit = 'P07'), 'pakar',   'aktif'),
@@ -49,106 +54,135 @@ INSERT INTO kasus (kode_kasus, id_penyakit, sumber, status) VALUES
 INSERT INTO detail_kasus (id_kasus, id_gejala, nilai)
 SELECT k.id_kasus, g.id_gejala, d.nilai
 FROM (
-    SELECT 'K001' AS kode_kasus, 'G01' AS kode_gejala, 1 AS nilai
-    UNION ALL SELECT 'K001', 'G05', 1
+    -- P01: Common Cold (Pilek) — dominan bersin, hidung tersumbat, pilek cair
+    SELECT 'K001' AS kode_kasus, 'G05' AS kode_gejala, 1 AS nilai
     UNION ALL SELECT 'K001', 'G06', 1
     UNION ALL SELECT 'K001', 'G07', 1
     UNION ALL SELECT 'K001', 'G08', 1
 
+    UNION ALL SELECT 'K002', 'G01', 1
     UNION ALL SELECT 'K002', 'G05', 1
     UNION ALL SELECT 'K002', 'G06', 1
     UNION ALL SELECT 'K002', 'G07', 1
-    UNION ALL SELECT 'K002', 'G09', 1
+    UNION ALL SELECT 'K002', 'G10', 1
+    UNION ALL SELECT 'K002', 'G13', 1
 
+    UNION ALL SELECT 'K019', 'G05', 1
+    UNION ALL SELECT 'K019', 'G06', 1
+    UNION ALL SELECT 'K019', 'G07', 1
+    UNION ALL SELECT 'K019', 'G08', 1
+    UNION ALL SELECT 'K019', 'G10', 1
+
+    -- P02: Influenza (Flu) — dominan demam sedang-berat, menggigil, mudah lelah, batuk kering
     UNION ALL SELECT 'K003', 'G01', 3
     UNION ALL SELECT 'K003', 'G02', 1
     UNION ALL SELECT 'K003', 'G03', 1
-    UNION ALL SELECT 'K003', 'G05', 1
-    UNION ALL SELECT 'K003', 'G07', 1
-    UNION ALL SELECT 'K003', 'G18', 2
+    UNION ALL SELECT 'K003', 'G10', 2
+    UNION ALL SELECT 'K003', 'G13', 1
 
     UNION ALL SELECT 'K004', 'G01', 2
     UNION ALL SELECT 'K004', 'G02', 1
     UNION ALL SELECT 'K004', 'G03', 1
     UNION ALL SELECT 'K004', 'G08', 1
-    UNION ALL SELECT 'K004', 'G10', 2
+    UNION ALL SELECT 'K004', 'G10', 1
+    UNION ALL SELECT 'K004', 'G13', 1
 
+    UNION ALL SELECT 'K020', 'G01', 2
+    UNION ALL SELECT 'K020', 'G02', 1
+    UNION ALL SELECT 'K020', 'G03', 1
+    UNION ALL SELECT 'K020', 'G08', 2
+    UNION ALL SELECT 'K020', 'G10', 2
+    UNION ALL SELECT 'K020', 'G13', 1
+
+    -- P03: Faringitis — dominan sakit tenggorokan sedang-berat, suara serak, demam ringan
     UNION ALL SELECT 'K005', 'G01', 1
     UNION ALL SELECT 'K005', 'G08', 2
     UNION ALL SELECT 'K005', 'G09', 1
 
+    UNION ALL SELECT 'K006', 'G01', 2
     UNION ALL SELECT 'K006', 'G03', 1
     UNION ALL SELECT 'K006', 'G08', 3
+    UNION ALL SELECT 'K006', 'G09', 1
 
-    UNION ALL SELECT 'K007', 'G01', 1
+    -- P04: Bronkitis Akut — dominan batuk berdahak 3-7 hari, sesak ringan aktivitas
     UNION ALL SELECT 'K007', 'G03', 1
-    UNION ALL SELECT 'K007', 'G10', 3
+    UNION ALL SELECT 'K007', 'G10', 2
     UNION ALL SELECT 'K007', 'G11', 1
+    UNION ALL SELECT 'K007', 'G14', 1
 
+    UNION ALL SELECT 'K008', 'G01', 1
     UNION ALL SELECT 'K008', 'G10', 2
     UNION ALL SELECT 'K008', 'G11', 1
     UNION ALL SELECT 'K008', 'G14', 1
 
-    UNION ALL SELECT 'K009', 'G10', 2
+    -- P05: Asma — dominan napas mengi, sesak napas aktivitas/istirahat, batuk kering
+    UNION ALL SELECT 'K009', 'G10', 1
     UNION ALL SELECT 'K009', 'G13', 1
     UNION ALL SELECT 'K009', 'G14', 2
+    UNION ALL SELECT 'K009', 'G15', 1
     UNION ALL SELECT 'K009', 'G16', 1
 
+    UNION ALL SELECT 'K010', 'G10', 2
+    UNION ALL SELECT 'K010', 'G13', 1
     UNION ALL SELECT 'K010', 'G14', 3
-    UNION ALL SELECT 'K010', 'G15', 1
+    UNION ALL SELECT 'K010', 'G15', 2
     UNION ALL SELECT 'K010', 'G16', 1
 
-    UNION ALL SELECT 'K011', 'G07', 1
-    UNION ALL SELECT 'K011', 'G14', 1
+    UNION ALL SELECT 'K011', 'G10', 1
+    UNION ALL SELECT 'K011', 'G13', 1
+    UNION ALL SELECT 'K011', 'G14', 2
     UNION ALL SELECT 'K011', 'G16', 1
 
-    -- K012: kasus uji duplikat — hanya dua gejala di atas 0
+    -- P06: Pneumonia — dominan demam tinggi, menggigil, batuk berdahak, sesak, nyeri dada
+    UNION ALL SELECT 'K012', 'G01', 2
+    UNION ALL SELECT 'K012', 'G02', 1
+    UNION ALL SELECT 'K012', 'G03', 1
+    UNION ALL SELECT 'K012', 'G10', 2
+    UNION ALL SELECT 'K012', 'G11', 1
     UNION ALL SELECT 'K012', 'G14', 2
-    UNION ALL SELECT 'K012', 'G16', 1
+    UNION ALL SELECT 'K012', 'G18', 2
 
     UNION ALL SELECT 'K013', 'G01', 3
     UNION ALL SELECT 'K013', 'G02', 1
-    UNION ALL SELECT 'K013', 'G10', 3
+    UNION ALL SELECT 'K013', 'G10', 2
     UNION ALL SELECT 'K013', 'G11', 1
     UNION ALL SELECT 'K013', 'G14', 2
     UNION ALL SELECT 'K013', 'G18', 2
 
-    UNION ALL SELECT 'K014', 'G01', 2
+    UNION ALL SELECT 'K014', 'G01', 3
+    UNION ALL SELECT 'K014', 'G02', 1
     UNION ALL SELECT 'K014', 'G10', 2
     UNION ALL SELECT 'K014', 'G11', 1
-    UNION ALL SELECT 'K014', 'G14', 1
+    UNION ALL SELECT 'K014', 'G14', 2
     UNION ALL SELECT 'K014', 'G15', 1
+    UNION ALL SELECT 'K014', 'G18', 3
 
+    -- P07: TBC Paru — dominan batuk > 1 minggu, keringat malam, lelah, batuk darah/dahak
     UNION ALL SELECT 'K015', 'G01', 1
     UNION ALL SELECT 'K015', 'G03', 1
     UNION ALL SELECT 'K015', 'G04', 1
     UNION ALL SELECT 'K015', 'G10', 3
+    UNION ALL SELECT 'K015', 'G11', 1
 
     UNION ALL SELECT 'K016', 'G03', 1
     UNION ALL SELECT 'K016', 'G04', 1
     UNION ALL SELECT 'K016', 'G10', 3
+    UNION ALL SELECT 'K016', 'G11', 1
     UNION ALL SELECT 'K016', 'G12', 1
 
+    -- P08: PPOK — dominan sesak berat aktivitas & istirahat, batuk berdahak > 1 minggu, mengi
+    UNION ALL SELECT 'K017', 'G03', 1
     UNION ALL SELECT 'K017', 'G10', 3
-    UNION ALL SELECT 'K017', 'G14', 2
+    UNION ALL SELECT 'K017', 'G11', 1
+    UNION ALL SELECT 'K017', 'G14', 3
+    UNION ALL SELECT 'K017', 'G15', 2
     UNION ALL SELECT 'K017', 'G16', 1
-    UNION ALL SELECT 'K017', 'G18', 1
 
-    UNION ALL SELECT 'K018', 'G03', 1
     UNION ALL SELECT 'K018', 'G10', 3
+    UNION ALL SELECT 'K018', 'G11', 1
     UNION ALL SELECT 'K018', 'G14', 3
-    UNION ALL SELECT 'K018', 'G15', 2
-
-    UNION ALL SELECT 'K019', 'G01', 1
-    UNION ALL SELECT 'K019', 'G05', 1
-    UNION ALL SELECT 'K019', 'G06', 1
-    UNION ALL SELECT 'K019', 'G07', 1
-    UNION ALL SELECT 'K019', 'G08', 1
-
-    UNION ALL SELECT 'K020', 'G01', 2
-    UNION ALL SELECT 'K020', 'G03', 1
-    UNION ALL SELECT 'K020', 'G08', 1
-    UNION ALL SELECT 'K020', 'G14', 1
+    UNION ALL SELECT 'K018', 'G15', 1
+    UNION ALL SELECT 'K018', 'G16', 1
 ) AS d
 JOIN kasus  k ON k.kode_kasus  = d.kode_kasus
 JOIN gejala g ON g.kode_gejala = d.kode_gejala;
