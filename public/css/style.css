@@ -1,0 +1,671 @@
+/* ============================================================
+   style.css — gaya tambahan di atas Bootstrap 5.3 (via CDN)
+   Desain health-tech: bersih, minimalis, lega (Publik & Admin).
+   ============================================================ */
+:root {
+    --spc-sidebar-width: 250px;
+    --spc-brand: #0284c7;           /* biru medis / sky-600 */
+    --spc-brand-hover: #0369a1;     /* sky-700 */
+    --spc-brand-soft: #e0f2fe;      /* sky-100 */
+    --spc-text-primary: #0f172a;    /* slate-900 */
+    --spc-text-secondary: #475569;  /* slate-600 */
+    --spc-text-muted: #94a3b8;      /* slate-400 */
+    --spc-bg-page: #f8fafc;         /* slate-50 */
+    --spc-bg-white: #ffffff;
+    --spc-border: #e2e8f0;          /* slate-200 */
+    --spc-radius: 0.75rem;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--spc-text-primary);
+    background: var(--spc-bg-page);
+    letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   NAVBAR PUBLIK — putih bersih, teks gelap, aksen biru medis
+   ============================================================ */
+.spc-navbar {
+    background: var(--spc-bg-white);
+    border-bottom: 1px solid var(--spc-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.spc-navbar .navbar-brand {
+    color: var(--spc-text-primary);
+    font-weight: 600;
+    gap: 0.4rem;
+}
+.spc-navbar .navbar-brand:hover {
+    color: var(--spc-brand);
+}
+.spc-brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--spc-brand);
+    color: #fff;
+    font-size: 1.1rem;
+}
+.spc-navbar .navbar-toggler {
+    border-color: var(--spc-border);
+}
+.spc-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23475569' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.spc-navbar .nav-link {
+    color: var(--spc-text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 0.5rem;
+    transition: color 0.15s, background 0.15s;
+}
+.spc-navbar .nav-link:hover,
+.spc-navbar .nav-link:focus {
+    color: var(--spc-brand);
+    background: var(--spc-brand-soft);
+}
+.spc-navbar .nav-link.active {
+    color: var(--spc-brand) !important;
+    font-weight: 600;
+}
+.spc-nav-user {
+    color: var(--spc-text-secondary) !important;
+    font-size: 0.875rem;
+}
+
+/* Tombol navbar — minimalis */
+.spc-btn-login {
+    color: var(--spc-text-secondary);
+    border: 1px solid var(--spc-border);
+    background: transparent;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.35rem 1rem;
+    transition: all 0.15s;
+}
+.spc-btn-login:hover {
+    color: var(--spc-brand);
+    border-color: var(--spc-brand);
+    background: var(--spc-brand-soft);
+}
+.spc-btn-register {
+    color: #fff;
+    background: var(--spc-brand);
+    border: 1px solid var(--spc-brand);
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.35rem 1rem;
+    transition: all 0.15s;
+}
+.spc-btn-register:hover {
+    color: #fff;
+    background: var(--spc-brand-hover);
+    border-color: var(--spc-brand-hover);
+}
+.spc-btn-logout {
+    color: var(--spc-text-muted);
+    border: 1px solid var(--spc-border);
+    background: transparent;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    transition: all 0.15s;
+}
+.spc-btn-logout:hover {
+    color: #dc2626;
+    border-color: #fecaca;
+    background: #fef2f2;
+}
+
+/* ============================================================
+   BERANDA — HERO & 3 LANGKAH
+   ============================================================ */
+.spc-hero {
+    padding: 3.5rem 1rem 2rem;
+    max-width: 720px;
+    margin: 0 auto;
+}
+.spc-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--spc-brand);
+    background: var(--spc-brand-soft);
+    border: 1px solid rgba(2, 132, 199, 0.15);
+    padding: 0.35em 1em;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+.spc-hero-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--spc-text-primary);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+.spc-hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--spc-text-secondary);
+    max-width: 600px;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+.spc-btn-primary {
+    color: #fff;
+    background: var(--spc-brand);
+    border: 1px solid var(--spc-brand);
+    font-weight: 600;
+    border-radius: var(--spc-radius);
+    transition: all 0.2s;
+}
+.spc-btn-primary:hover, .spc-btn-primary:focus {
+    color: #fff;
+    background: var(--spc-brand-hover);
+    border-color: var(--spc-brand-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+.spc-btn-outline {
+    color: var(--spc-brand);
+    background: transparent;
+    border: 1px solid var(--spc-brand);
+    font-weight: 600;
+    border-radius: var(--spc-radius);
+    transition: all 0.2s;
+}
+.spc-btn-outline:hover, .spc-btn-outline:focus {
+    color: #fff;
+    background: var(--spc-brand);
+    border-color: var(--spc-brand);
+}
+.spc-btn-ghost {
+    color: var(--spc-text-secondary);
+    background: transparent;
+    border: 1px solid var(--spc-border);
+    font-weight: 500;
+    border-radius: var(--spc-radius);
+    transition: all 0.15s;
+}
+.spc-btn-ghost:hover, .spc-btn-ghost:focus {
+    color: var(--spc-brand);
+    border-color: var(--spc-brand);
+    background: var(--spc-brand-soft);
+}
+.spc-stats {
+    font-size: 0.875rem;
+    color: var(--spc-text-muted);
+    font-weight: 500;
+}
+.spc-stats-dot {
+    margin: 0 0.5rem;
+    color: var(--spc-border);
+}
+.spc-steps {
+    padding: 2rem 0 2.5rem;
+}
+.spc-step {
+    text-align: center;
+    padding: 2rem 1.25rem;
+    border: 1px solid var(--spc-border);
+    border-radius: var(--spc-radius);
+    background: var(--spc-bg-white);
+    height: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.spc-step:hover {
+    border-color: rgba(2, 132, 199, 0.3);
+    box-shadow: 0 2px 12px rgba(2, 132, 199, 0.08);
+}
+.spc-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--spc-brand-soft);
+    color: var(--spc-brand);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.spc-step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--spc-text-primary);
+    margin-bottom: 0.5rem;
+}
+.spc-step-desc {
+    font-size: 0.875rem;
+    color: var(--spc-text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0;
+}
+.spc-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #f1f5f9;
+    border-left: 3px solid var(--spc-border);
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: var(--spc-text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+.spc-disclaimer i {
+    color: var(--spc-text-muted);
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   PANEL ADMIN — SHELL & SIDEBAR TERANG MINIMALIS
+   ============================================================ */
+.spc-admin-body {
+    background-color: var(--spc-bg-page);
+}
+.spc-admin-sidebar {
+    width: var(--spc-sidebar-width);
+    background-color: #ffffff;
+    border-right: 1px solid var(--spc-border);
+    z-index: 1040;
+}
+.spc-sidebar-category {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    padding: 0.5rem 0.75rem 0.25rem;
+    text-transform: uppercase;
+}
+.spc-sidebar-link {
+    color: #334155;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.15s ease-in-out;
+}
+.spc-sidebar-link:hover {
+    color: var(--spc-brand);
+    background-color: #f1f5f9;
+}
+.spc-sidebar-link.active {
+    color: var(--spc-brand) !important;
+    background-color: #e0f2fe !important;
+    font-weight: 600;
+}
+.spc-sidebar-link.active i {
+    color: var(--spc-brand);
+}
+
+/* Admin Card & Topbar */
+.spc-admin-card {
+    background: #ffffff;
+    border: 1px solid var(--spc-border);
+    border-radius: var(--spc-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+.spc-metric-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+}
+.bg-blue-subtle { background-color: #e0f2fe; }
+.bg-indigo-subtle { background-color: #e0e7ff; }
+.text-indigo { color: #4f46e5; }
+.bg-teal-subtle { background-color: #ccfbf1; }
+.text-teal { color: #0d9488; }
+
+/* Collapsible Details pada Validasi */
+.spc-details {
+    border-radius: var(--spc-radius);
+}
+.spc-details-summary {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+.spc-details-summary::-webkit-details-marker {
+    display: none;
+}
+.spc-details[open] .spc-details-hint i {
+    transform: rotate(180deg);
+}
+.spc-details-hint i {
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+/* ============================================================
+   SOFT PASTEL PILL BADGES (Health-Tech)
+   ============================================================ */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 0.35em 0.65em;
+    border-radius: 999px;
+}
+/* Override class text-bg bawaan bootstrap agar pastel lembut */
+.badge.text-bg-success,
+.badge.bg-success {
+    background-color: #dcfce7 !important;
+    color: #166534 !important;
+    border: 1px solid rgba(22, 101, 52, 0.15);
+}
+.badge.text-bg-warning,
+.badge.bg-warning {
+    background-color: #fef9c3 !important;
+    color: #854d0e !important;
+    border: 1px solid rgba(133, 77, 14, 0.15);
+}
+.badge.text-bg-danger,
+.badge.bg-danger {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+    border: 1px solid rgba(153, 27, 27, 0.15);
+}
+.badge.text-bg-primary,
+.badge.bg-primary,
+.badge.text-bg-info,
+.badge.bg-info {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1px solid rgba(2, 132, 199, 0.15);
+}
+.badge.text-bg-secondary,
+.badge.bg-secondary,
+.badge.text-bg-dark,
+.badge.bg-dark {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0;
+}
+.badge.text-bg-light {
+    background-color: #f8fafc !important;
+    color: #64748b !important;
+    border: 1px solid #e2e8f0;
+}
+
+/* Badge spesifik kustom */
+.spc-badge-pastel-blue {
+    background-color: #e0f2fe;
+    color: #0284c7;
+    border: 1px solid rgba(2, 132, 199, 0.15);
+}
+.spc-badge-pastel-yellow {
+    background-color: #fef9c3;
+    color: #854d0e;
+    border: 1px solid rgba(133, 77, 14, 0.15);
+}
+.spc-badge-role {
+    background: var(--spc-brand-soft);
+    color: var(--spc-brand);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2em 0.55em;
+    border-radius: 999px;
+}
+.spc-badge-tamu {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3em 0.7em;
+    border-radius: 999px;
+}
+
+/* ============================================================
+   TABEL & DATATABLES — BERSIH, LEGA, MINIMALIS
+   ============================================================ */
+.table {
+    margin-bottom: 0;
+    color: #334155;
+}
+.table > :not(caption) > * > * {
+    padding: 0.75rem 1rem;
+    border-bottom-color: #f1f5f9;
+}
+.table thead th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-bottom: 1px solid var(--spc-border);
+}
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+#tabelMaster {
+    width: 100% !important;
+    border-collapse: collapse;
+}
+#tabelMaster td,
+#tabelMaster th {
+    vertical-align: middle;
+}
+.dataTables_wrapper {
+    padding-top: 0.35rem;
+}
+.dataTables_wrapper .row {
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid var(--spc-border);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+}
+.dataTables_wrapper .dataTables_filter input:focus,
+.dataTables_wrapper .dataTables_length select:focus {
+    border-color: var(--spc-brand);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(2, 132, 199, 0.15);
+}
+.dataTables_info,
+.dataTables_paginate {
+    font-size: 0.85rem;
+    color: #64748b;
+    padding-top: 0.85rem;
+}
+.page-item.active .page-link {
+    background-color: var(--spc-brand);
+    border-color: var(--spc-brand);
+}
+.page-link {
+    color: var(--spc-brand);
+    border-radius: 6px;
+    margin: 0 2px;
+}
+
+/* ============================================================
+   TOMBOL AKSI & KONTROL
+   ============================================================ */
+.btn-sm {
+    border-radius: 6px;
+    font-weight: 500;
+}
+.btn-outline-secondary {
+    border-color: var(--spc-border);
+    color: #475569;
+}
+.btn-outline-secondary:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+.btn-outline-primary {
+    border-color: rgba(2, 132, 199, 0.3);
+    color: var(--spc-brand);
+}
+.btn-outline-primary:hover {
+    background-color: var(--spc-brand);
+    border-color: var(--spc-brand);
+    color: #ffffff;
+}
+
+/* ============================================================
+   DIAGNOSA FORM & HASIL
+   ============================================================ */
+.btn-tap {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-select-tap {
+    min-height: 44px;
+}
+.form-check-input-tap {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.1rem;
+}
+.gejala-card {
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.gejala-item.terpilih .gejala-card {
+    border-color: var(--spc-brand);
+    box-shadow: 0 0 0 0.15rem rgba(2, 132, 199, 0.15);
+}
+.btn-pil {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+}
+.btn-pil.btn-outline-primary {
+    border-color: #b6c9e8;
+}
+.btn-check:checked + .btn-pil {
+    font-weight: 600;
+}
+.nav-langkah {
+    scrollbar-width: thin;
+}
+.nav-langkah .nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    color: var(--bs-body-color);
+    background: #ffffff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 999px;
+}
+.nav-langkah .nav-link:hover {
+    background: var(--spc-brand-soft);
+}
+.nav-langkah .nav-link.active {
+    color: #ffffff;
+    background: var(--spc-brand);
+    border-color: var(--spc-brand);
+}
+.langkah-nomor {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(2, 132, 199, 0.12);
+    color: var(--spc-brand);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+.nav-langkah .nav-link.active .langkah-nomor {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.25);
+}
+.nav-langkah .nav-link.active .badge {
+    color: var(--spc-brand) !important;
+}
+
+/* Hasil Diagnosa */
+.hasil-utama {
+    background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0) 42%);
+}
+.hasil-utama .display-5 {
+    letter-spacing: -0.02em;
+}
+.saran-blok {
+    border-left: 4px solid var(--spc-brand);
+    background: var(--bs-light);
+    border-radius: 0.5rem;
+    padding: 0.85rem 1rem;
+}
+.saran-blok.saran-penyebab {
+    border-left-color: var(--bs-warning);
+}
+.saran-blok.saran-cegah {
+    border-left-color: var(--bs-success);
+}
+.ringkasan-gejala .list-group-item {
+    background: transparent;
+}
+.detail-teknis summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+.btn-check:checked + label[for^="rating"] {
+    background: var(--bs-warning);
+    border-color: var(--bs-warning);
+    color: #212529;
+}
+
+/* Kotak Keputusan Pakar */
+.kotak-validasi {
+    background: #fbfdff;
+}
+.keputusan-kartu {
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+                box-shadow 0.15s ease-in-out;
+}
+.keputusan-kartu:hover {
+    background: var(--spc-brand-soft);
+    box-shadow: 0 0.25rem 0.75rem rgba(2, 132, 199, 0.10);
+}
+.btn-check:checked + .keputusan-kartu {
+    border-color: var(--spc-brand) !important;
+    background: var(--spc-brand-soft);
+}
+.btn-check:focus-visible + .keputusan-kartu {
+    outline: 2px solid var(--spc-brand);
+    outline-offset: 2px;
+}
+.nav-pills .nav-link {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+}

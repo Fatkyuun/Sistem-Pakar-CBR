@@ -1,0 +1,29 @@
+{
+  "name": "sistem-pakar/sistem-pakar-cbr",
+  "description": "Sistem Pakar Penyakit Pernapasan dengan Case-Based Reasoning (siklus 4R: Retrieve, Reuse, Revise, Retain)",
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "classmap": [
+      "app/controllers/",
+      "app/models/",
+      "app/services/"
+    ]
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "config": {
+    "platform": {
+      "php": "8.1.0"
+    }
+  }
+}

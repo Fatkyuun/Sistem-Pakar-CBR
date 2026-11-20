@@ -1,0 +1,19 @@
+# Konfigurasi rahasia (AGENTS.md: jangan di-commit)
+config/.env
+
+# Dependensi Composer
+vendor/
+composer.lock
+phpunit.phar
+phpunit*.phar
+
+# Log & berkas sementara
+*.log
+logs/
+*.tmp
+.phpunit.cache/
+.phpunit.result.cache
+
+# Berkas sistem
+.DS_Store
+Thumbs.db

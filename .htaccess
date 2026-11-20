@@ -1,0 +1,25 @@
+# ============================================================
+# .htaccess (root proyek) — Sistem Pakar Penyakit Pernapasan (CBR)
+# Berlaku untuk dua skenario akses:
+#   1. Virtual host : http://sistem-pakar-cbr.test
+#   2. Sub-folder   : http://localhost/sistem-pakar-cbr
+# Semua request yang bukan berkas nyata diteruskan ke
+# public/index.php (satu-satunya titik masuk web).
+# ============================================================
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Blokir folder internal aplikasi (tak boleh dilayani web)
+  RewriteRule ^(app|config|tests|docs)(/|$) - [F,L]
+
+  # Berkas nyata (mis. robots.txt) dilayani apa adanya; semua request lain
+  # masuk lewat front controller. Aset selalu ditulis /public/css/... dsb
+  # dari helper asset_url() agar MIME type benar di kedua mode akses.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ public/index.php [QSA,L]
+</IfModule>
+
+# Lindungi berkas kerja/kredensial agar tidak bisa diunduh langsung
+<FilesMatch "(^\.env|\.sql$|\.md$|composer\.json$|composer\.lock$|phpunit\.xml(\.dist)?$)">
+  Require all denied
+</FilesMatch>
